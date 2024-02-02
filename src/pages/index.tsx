@@ -1,11 +1,9 @@
-import LoginLayout from "./login-layout";
+import LoginLayout from "@/components/login-layout";
 
 export default function Home() {
   return (
     <>
-      <LoginLayout>
-        login
-      </LoginLayout>
+      <LoginLayout>login</LoginLayout>
     </>
   );
 }
