@@ -9,7 +9,7 @@ const Header = ({ children }: any) => {
 
   return (
     <div
-      className={`${styles["test"]} bg-[#605bff] h-[80px] relative before:hidden before:absolute before:w-full before:h-[100px] content-[''] before:bg-white before:right-0 before:bottom-0 lg:h-screen`}
+      className={`${styles["clip-bg"]} bg-[#605bff] h-[80px] relative before:hidden before:absolute before:w-full before:h-[100px] content-[''] before:bg-white before:right-0 before:bottom-0 lg:h-screen`}
     >
       <div
         className={`flex w-[90%] bg-gren-300 h-full items-center lg:items-start justify-between lg:flex-col mx-auto gap-x-[10px] lg:pt-[40px] lg:pb-[45px]`}

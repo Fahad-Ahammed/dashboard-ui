@@ -1,0 +1,5 @@
+@media (min-width: 1024px) {
+  .clip-bg {
+    clip-path: polygon(0 100%, 0 0, 100% 0, 80% 100%);
+  }
+}
