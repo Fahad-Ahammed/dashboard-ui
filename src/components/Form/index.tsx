@@ -1,9 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import { Lato, Montserrat } from "next/font/google";
+import {lato,montserrat} from "@/utils/fonts"
 
-const montserrat = Montserrat({ subsets: ["latin"], weight: ["400", "700"] });
-const lato = Lato({ subsets: ["latin"], weight: ["400"] });
 const index = () => {
   const signMethods = [
     {

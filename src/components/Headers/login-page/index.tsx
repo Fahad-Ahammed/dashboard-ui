@@ -1,8 +1,6 @@
 import styles from "./styles.module.css";
-import useScreenWidth from "@/custom-hooks/useScreenWidth";
-import { Nunito, Montserrat } from "next/font/google";
-const nunito = Nunito({ subsets: ["latin"], weight: ["600"] });
-const montserrat = Montserrat({ subsets: ["latin"], weight: ["700"] });
+import useScreenWidth from "@/utils/custom-hooks/useScreenWidth";
+import {nunito,montserrat} from "@/utils/fonts"
 
 const Header = ({ children }: any) => {
   const agentScreenWidth = useScreenWidth();
@@ -29,8 +27,8 @@ const Header = ({ children }: any) => {
         </svg>
         <h1
           className={`${
-            agentScreenWidth < 1024 ? nunito.className : montserrat.className
-          } lg:w-[65%] relative lg:top-[-40px] lg:text-[72px] lg:leading-[88px] lg:ml-[80px w-full lg:text-center text-[20px] leading-[27px] font-600 text-[#FAFAFB]`}
+            agentScreenWidth < 1024 ? `${nunito.className} font-[600] ` : `${montserrat.className} font-[700]`
+          } lg:w-[65%] relative lg:top-[-40px] lg:text-[72px] lg:leading-[88px] lg:ml-[80px w-full lg:text-center text-[20px] leading-[27px] text-[#FAFAFB]`}
         >
           Base
         </h1>

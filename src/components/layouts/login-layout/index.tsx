@@ -1,6 +1,6 @@
-import Header from "@/components/Header";
+import Header from "@/components/Headers/login-page";
 import Footer from "@/components/Footer";
-import useScreenWidth from "@/custom-hooks/useScreenWidth";
+import useScreenWidth from "@/utils/custom-hooks/useScreenWidth";
 
 const LoginLayout = ({ children }: any) => {
   const agentScreenWidth = useScreenWidth();

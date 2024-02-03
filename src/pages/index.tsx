@@ -1,14 +1,12 @@
-import LoginLayout from "@/components/login-layout";
+import LoginLayout from "@/components/layouts/login-layout";
 import Form from "@/components/Form";
-import { Lato, Montserrat } from "next/font/google";
-const lato = Lato({ subsets: ["latin"], weight: ["400"] });
-const montserrat = Montserrat({ subsets: ["latin"], weight: ["700"] });
+import {montserrat,lato} from "@/utils/fonts"
 
 export default function Home() {
   return (
     <>
       <LoginLayout>
-        <div className="pt-[30px] lg:pt-[190px]  max-w-[740px]">
+        <div className="pt-[30px] lg:pt-[190px]  max-w-[740px]  max-lg:mx-auto ">
           <div className="w-[90%] mx-auto xl:ml-[95px] max-w-[425px]  " >
             <div className="ml-[10px] mb-[30px] lg:ml-0 text-black ">
               <h2
