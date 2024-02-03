@@ -28,7 +28,7 @@ const Header = ({ children }: any) => {
         <h1
           className={`${
             agentScreenWidth < 1024 ? `${nunito.className} font-[600] ` : `${montserrat.className} font-[700]`
-          } lg:w-[65%] relative lg:top-[-40px] lg:text-[72px] lg:leading-[88px] lg:ml-[80px w-full lg:text-center text-[20px] leading-[27px] text-[#FAFAFB]`}
+          } lg:w-[65%] relative lg:top-[-40px] lg:text-[72px] lg:leading-[88px] w-full lg:text-center text-[20px] leading-[27px] text-[#FAFAFB]`}
         >
           Base
         </h1>
