@@ -9,10 +9,10 @@ const Header = ({ children }: any) => {
 
   return (
     <div
-      className={`${styles["clip-bg"]} bg-[#605bff] h-[80px] relative before:hidden before:absolute before:w-full before:h-[100px] content-[''] before:bg-white before:right-0 before:bottom-0 lg:h-screen`}
+      className={`${styles["clip-bg"]} relative lg:before:absolute before:z-[9] before:w-full before:h-full before:left-0 before:right-0 before:bg-[#faf8ff] bg-[#605bff] h-[80px] lg:h-full`}
     >
       <div
-        className={`flex w-[90%] bg-gren-300 h-full items-center lg:items-start justify-between lg:flex-col mx-auto gap-x-[10px] lg:pt-[40px] lg:pb-[45px]`}
+        className={`flex w-[90%] max-w-[740px] h-full items-center lg:items-start justify-between lg:flex-col mx-auto gap-x-[10px] lg:pt-[40px] lg:pb-[45px]`}
       >
         <svg
           className="w-[26px] h-[26px] lg:w-[80px] lg:h-[80px]  "

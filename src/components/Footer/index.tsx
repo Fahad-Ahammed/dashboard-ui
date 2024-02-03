@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
-    <div>
-      <div className="flex items-center justify-center gap-x-[15px] lg:gap-x-[30px]  ">
+    <>
+      <div className="flex max-lg:pt-[40px] max-lg:pb-[45px] max-lg:bg-[#faf8ff] items-center justify-center gap-x-[15px] lg:gap-x-[30px]  ">
         {/* reddit */}
         <svg
           className="w-[28px] h-[28px] lg:w-[42px] lg:h-[42px]"
@@ -59,7 +59,7 @@ const Footer = () => {
           </svg>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

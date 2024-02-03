@@ -1,22 +1,18 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import useScreenWidth from "@/custom-hooks/useScreenWidth";
 
 const LoginLayout = ({ children }: any) => {
+  const agentScreenWidth = useScreenWidth();
   return (
     <>
-      <div className="lg:hidden ">
-        <Header />
-        <main className="">{children}</main>
-        <Footer />
-      </div>
-
-      <div className="hidden lg:flex">
-        <div className="w-[50%]">
-          <Header>
-            <Footer />
-          </Header>
+      <div className="lg:flex min-h-screen ">
+        <div className="lg:flex-1 " >
+          <Header>{agentScreenWidth >= 1024 && <Footer />}</Header>
         </div>
-        <main className="">{children}</main>
+        <main className="lg:flex-1 max-lg:h-[calc(100vh-80px)] bg-[#faf8ff]  ">{children}
+        {agentScreenWidth < 1024 && <Footer />}
+        </main>
       </div>
     </>
   );
