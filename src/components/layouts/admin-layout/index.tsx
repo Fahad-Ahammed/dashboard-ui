@@ -3,9 +3,9 @@ import Header from "@/components/Headers/admin";
 const Index = ({ children }: any) => {
   return (
     <>
-      <div>
+      <div className="lg:flex" >
         <Header />
-        <main>{children}</main>
+        <main className="flex-1" >{children}</main>
       </div>
     </>
   );

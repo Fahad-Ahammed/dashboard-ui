@@ -1,17 +1,21 @@
 import AdminLayout from "@/components/layouts/admin-layout";
 
-const Test = () => {
-  return <h1>testing....</h1>;
+const DefaultLayout = ({ title }: any) => {
+  return (
+    <div className="min-h-screen  bg-[#fafafb] w-full pt-[50px]  pl-[30px] " >   
+      <h1 className="text-[24px] leading-[32px] text-black capitalize  ">{title}</h1>
+    </div>
+    )
 };
 const Index = (props: any) => {
   const componentMap: any = {
-    dashboard: <Test />,
-    upload: <Test />,
-    invoice: <Test />,
-    schedule: <Test />,
-    calendar: <Test />,
-    notification: <Test />,
-    settings: <Test />,
+    dashboard: <DefaultLayout title={"dashboard"} />,
+    upload: <DefaultLayout title={"upload"} />,
+    invoice: <DefaultLayout title={"invoice"} />,
+    schedule: <DefaultLayout title={"schedule"} />,
+    calendar: <DefaultLayout title={"calendar"} />,
+    notification: <DefaultLayout title={"notification"} />,
+    settings: <DefaultLayout title={"settings"} />,
   };
   const Component = componentMap[`${props.page}`];
 

@@ -1,27 +1,26 @@
 import React from "react";
 import { nunito } from "@/utils/fonts";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import useScreenWidth from "@/utils/custom-hooks/useScreenWidth";
 
 const Header = () => {
-  const agentScreenWidth = useScreenWidth();
-  const [showNav, setShowNav] = useState(agentScreenWidth >= 1024);
+  // const agentScreenWidth = useScreenWidth();
+  const [showNav, setShowNav] = useState(false);
+
   const handleNav = () => {
     setShowNav((prev) => !prev);
   };
 
   return (
     <>
-      <div className=" bg-blue-300">
+      <div className=" max-lg:bg-blue-300">
         <NavBar showNav={showNav} handleNav={handleNav} />
-        {agentScreenWidth < 1024 && <div className=" relative h-[80px] w-[90%] mx-auto max-w-[1300px] flex items-center ">
+        <div className=" lg:hidden relative h-[80px] w-[90%] mx-auto max-w-[1300px] flex items-center ">
           <svg
             onClick={handleNav}
-            className={`absolute ${
-              showNav ? "max-w-[0px] max-h-[0px] " : "max-w-[16px] max-h-[12px]"
-            } duration-300 ease-in-out`}
+            className={`absolute max-w-[16px] max-h-[12px] lg:hidden duration-300 ease-in-out`}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 18 14"
             fill="none"
@@ -35,8 +34,7 @@ const Header = () => {
           </svg>
           <Logo showNav={showNav} />
           <Profile />
-        </div> }
-        
+        </div>
       </div>
     </>
   );
@@ -45,12 +43,12 @@ const Header = () => {
 const Logo = ({ showNav }: any) => {
   return (
     <div
-      className={`flex z-[10] items-center gap-x-[10px] lg:gap-x-[15px] ${
-        showNav ? "ml-0" : "ml-[30px] "
-      } duration-300 ease-in-out `}
+      className={`flex z-[3] items-center gap-x-[10px] lg:gap-x-[15px] ${
+        showNav ? "ml-0" : "ml-[30px] lg:ml-0 "
+      } duration-300 ease-in-out lg:w-fit lg:ml-[55px] lg:mb-[50px] `}
     >
       <svg
-        className="min-w-[26px] min-h-[26px] lg:min-w-[42px] lg:min-h-[42px] duration-300 ease-in-out "
+        className="min-w-[26px] min-h-[26px] lg:min-w-[44px] lg:min-h-[44px] duration-300 ease-in-out "
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 27 27"
         fill="none"
@@ -63,7 +61,7 @@ const Logo = ({ showNav }: any) => {
         />
       </svg>
       <h1
-        className={`${nunito.className} lg:text-[24px] lg:leading-[32px] font-[600] relative w-full lg:text-center text-[20px] leading-[27px] text-[#030229]`}
+        className={`${nunito.className} lg:text-[24px] lg:leading-[32px] font-[600] relative w-full text-[20px] leading-[27px] text-[#030229]`}
       >
         Base
       </h1>
@@ -182,20 +180,21 @@ const NavBar = ({ handleNav, showNav }: any) => {
     } />
     </g>
     </svg>`,
-    }, 
+    },
   ];
+
   return (
     <>
       <nav
-        className={`fixed z-[3] w-full h-full bg-white duration-300 ease-in-out ${
-          showNav ? "translate-x-[0%] " : "translate-x-[-100%] "
+        className={`fixed lg:sticky lg:w-[220px] bg-white lg:h-screen lg:top-0 lg:left-0 z-[3] lg:pt-[50px] max-lg:duration-300 max-lg:ease-in-out ${
+          showNav
+            ? "translate-x-[0%] w-full h-full"
+            : "translate-x-[-100%] lg:translate-x-[0%] w-[220px]  "
         } `}
       >
-        <div className="w-[90%] mx-auto max-w-[1300px] h-[80px] mb-[45px] flex items-center ">
-          {/* <Logo /> */}
+        <div className="mr-[5%] lg:hidden ml-auto w-fit h-[80px] flex items-center ">
           <svg
             onClick={handleNav}
-            className="ml-auto"
             xmlns="http://www.w3.org/2000/svg"
             width="16"
             height="16"
@@ -211,7 +210,10 @@ const NavBar = ({ handleNav, showNav }: any) => {
             />
           </svg>
         </div>
-        <div className="">
+        <div className="hidden lg:block ">
+          <Logo />
+        </div>
+        <div className="mt-[45px] lg:mt-0 ">
           <div className="w-[90%] mx-auto max-w-[1300px]">
             {navs.map((element: any, index: any) => {
               return (
@@ -223,7 +225,7 @@ const NavBar = ({ handleNav, showNav }: any) => {
                         router.push(`/${element.name}`);
                       }
                     }}
-                    className="pl-[15px] mb-[40px] cursor-pointer "
+                    className="pl-[15px] lg:pl-[30px] mb-[40px] cursor-pointer "
                   >
                     <div className="flex gap-x-[15px] items-center">
                       <div
