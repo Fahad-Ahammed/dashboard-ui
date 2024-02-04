@@ -6,19 +6,19 @@ import { useRouter } from "next/router";
 import useScreenWidth from "@/utils/custom-hooks/useScreenWidth";
 
 const Header = () => {
-  // const agentScreenWidth = useScreenWidth();
+  const agentScreenWidth = useScreenWidth();
   const [showNav, setShowNav] = useState(false);
 
   const handleNav = () => {
     setShowNav((prev) => !prev);
-    // document.body.style.overflow = showNav ? "auto" : "hidden";
+    if (agentScreenWidth < 1024)
+      document.body.style.overflow = showNav ? "auto" : "hidden";
   };
 
-  // useEffect(()=>{
-  //   if(agentScreenWidth<1024 &&showNav ){
-  //     document.body.style.overflow = showNav ? "auto" : "hidden";
-  //   }
-  // },[])
+  useEffect(() => {
+    document.body.style.overflow =
+      agentScreenWidth > 1024 ? "auto" : showNav ? "hidden" : "auto";
+  }, [agentScreenWidth < 1024]);
 
   return (
     <>
@@ -81,7 +81,7 @@ export const Profile = () => {
     <>
       <div className="ml-auto flex items-center justify-center gap-x-[25px] lg:gap-x-[30px]">
         <svg
-        className="w-[16px] h-[23px] lg:w-[18px] lg:h-[23px]   "
+          className="w-[16px] h-[23px] lg:w-[18px] lg:h-[23px]   "
           xmlns="http://www.w3.org/2000/svg"
           width="16"
           height="23"
@@ -190,9 +190,6 @@ const NavBar = ({ handleNav, showNav }: any) => {
     </svg>`,
     },
   ];
-  useEffect(()=>{
-
-  },[showNav])
 
   return (
     <>
@@ -203,7 +200,9 @@ const NavBar = ({ handleNav, showNav }: any) => {
             : "translate-x-[-100%] lg:translate-x-[0%] w-[220px]  "
         } `}
       >
-        <div className={` lg:opacity-0 absolute right-0 mr-[5%] ml-auto w-fit h-[80px] flex items-center`}>
+        <div
+          className={` lg:opacity-0 absolute right-0 mr-[5%] ml-auto w-fit h-[80px] flex items-center`}
+        >
           <svg
             onClick={handleNav}
             xmlns="http://www.w3.org/2000/svg"
@@ -224,8 +223,8 @@ const NavBar = ({ handleNav, showNav }: any) => {
         <div className="hidden lg:block ">
           <Logo />
         </div>
-        <div className="mt-[115px] lg:mt-0 ">
-          <div className="w-[90%] mx-auto max-w-[1300px]">
+        <div className="mt-[115px] lg:mt-0">
+          <div className="w-[90%] mx-auto max-w-[1300px] max-lg:overflow-y-scroll no-scrollbar max-lg:h-screen sm:pb-[150px] lg:pb-0">
             {navs.map((element: any, index: any) => {
               return (
                 <React.Fragment key={index}>
