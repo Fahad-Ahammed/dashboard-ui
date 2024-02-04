@@ -215,6 +215,7 @@ const Index = () => {
                       onClick={() => {
                         setFileName("");
                         setUploadedData([]);
+                        selectedTags([]);
                         setUploaded(false);
                       }}
                       className=" w-fit mx-auto cursor-pointer text-[14px] leading-[24px] text-[#D33030]"
