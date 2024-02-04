@@ -1,16 +1,19 @@
 import AdminLayout from "@/components/layouts/admin-layout";
+import Upload from "@/templates/upload";
 
 const DefaultLayout = ({ title }: any) => {
   return (
-    <div className="min-h-screen  bg-[#fafafb] w-full pt-[50px]  pl-[30px] " >   
-      <h1 className="text-[24px] leading-[32px] text-black capitalize  ">{title}</h1>
+    <div className="min-h-screen bg-[#fafafb] w-full pt-[50px]  pl-[30px] ">
+      <h1 className="text-[24px] leading-[32px] text-black capitalize  ">
+        {title}
+      </h1>
     </div>
-    )
+  );
 };
 const Index = (props: any) => {
   const componentMap: any = {
     dashboard: <DefaultLayout title={"dashboard"} />,
-    upload: <DefaultLayout title={"upload"} />,
+    upload: <Upload />,
     invoice: <DefaultLayout title={"invoice"} />,
     schedule: <DefaultLayout title={"schedule"} />,
     calendar: <DefaultLayout title={"calendar"} />,

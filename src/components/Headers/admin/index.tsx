@@ -11,11 +11,18 @@ const Header = () => {
 
   const handleNav = () => {
     setShowNav((prev) => !prev);
+    // document.body.style.overflow = showNav ? "auto" : "hidden";
   };
+
+  // useEffect(()=>{
+  //   if(agentScreenWidth<1024 &&showNav ){
+  //     document.body.style.overflow = showNav ? "auto" : "hidden";
+  //   }
+  // },[])
 
   return (
     <>
-      <div className=" max-lg:bg-blue-300">
+      <div className="">
         <NavBar showNav={showNav} handleNav={handleNav} />
         <div className=" lg:hidden relative h-[80px] w-[90%] mx-auto max-w-[1300px] flex items-center ">
           <svg
@@ -69,11 +76,12 @@ const Logo = ({ showNav }: any) => {
   );
 };
 
-const Profile = () => {
+export const Profile = () => {
   return (
     <>
-      <div className="ml-auto flex items-center justify-center gap-x-[25px] ">
+      <div className="ml-auto flex items-center justify-center gap-x-[25px] lg:gap-x-[30px]">
         <svg
+        className="w-[16px] h-[23px] lg:w-[18px] lg:h-[23px]   "
           xmlns="http://www.w3.org/2000/svg"
           width="16"
           height="23"
@@ -182,17 +190,20 @@ const NavBar = ({ handleNav, showNav }: any) => {
     </svg>`,
     },
   ];
+  useEffect(()=>{
+
+  },[showNav])
 
   return (
     <>
       <nav
-        className={`fixed lg:sticky lg:w-[220px] bg-white lg:h-screen lg:top-0 lg:left-0 z-[3] lg:pt-[50px] max-lg:duration-300 max-lg:ease-in-out ${
+        className={`fixed lg:sticky lg:w-[220px] bg-white h-full lg:h-screen lg:top-0 lg:left-0 z-[3] lg:pt-[50px] max-lg:duration-300 max-lg:ease-in-out ${
           showNav
-            ? "translate-x-[0%] w-full h-full"
+            ? "translate-x-[0%] w-full"
             : "translate-x-[-100%] lg:translate-x-[0%] w-[220px]  "
         } `}
       >
-        <div className="mr-[5%] lg:hidden ml-auto w-fit h-[80px] flex items-center ">
+        <div className={` lg:opacity-0 absolute right-0 mr-[5%] ml-auto w-fit h-[80px] flex items-center`}>
           <svg
             onClick={handleNav}
             xmlns="http://www.w3.org/2000/svg"
@@ -213,7 +224,7 @@ const NavBar = ({ handleNav, showNav }: any) => {
         <div className="hidden lg:block ">
           <Logo />
         </div>
-        <div className="mt-[45px] lg:mt-0 ">
+        <div className="mt-[115px] lg:mt-0 ">
           <div className="w-[90%] mx-auto max-w-[1300px]">
             {navs.map((element: any, index: any) => {
               return (
