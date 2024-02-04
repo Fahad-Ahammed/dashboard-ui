@@ -55,9 +55,13 @@ const Index = () => {
     } catch (error) {
       console.warn(error);
     } finally {
-      setTimeout(() => {
+      if (isValid) {
+        setTimeout(() => {
+          setLoader(false);
+        }, 3000);
+      } else {
         setLoader(false);
-      }, 1000);
+      }
     }
   };
 
@@ -160,7 +164,7 @@ const Index = () => {
                 error?.email || error?.password ? "pointer-events-none" : ""
               } ${
                 montserrat.className
-              } font-bold text-[16px] leading-[20px] bg-[#605BFF]  text-white block w-full text-center py-[15px] rounded-[10px] xl:hover:scale-[1.005] xl:duration-300 ease-in-out `}
+              } relative font-bold text-[16px] leading-[20px] bg-[#605BFF]  text-white block w-full text-center py-[15px] rounded-[10px] xl:hover:scale-[1.005] xl:duration-300 ease-in-out `}
             >
               Sign In
               {loader && (
