@@ -16,13 +16,13 @@ const Index = () => {
 
   const handleFileChange = (e: any) => {
     const file = e?.target?.files[0];
-      setFileName(file.name);
-      Papa.parse(file, {
-        complete: (result: any) => {
-          setUploadedData(result.data);
-        },
-        header: true,
-      });
+    setFileName(file.name);
+    Papa.parse(file, {
+      complete: (result: any) => {
+        setUploadedData(result.data);
+      },
+      header: true,
+    });
   };
 
   const handleDrop = (e: any) => {
@@ -354,7 +354,7 @@ const Index = () => {
                               >
                                 <option
                                   disabled
-                                  defaultValue=""
+                                  selected
                                   className={`${figtree.className} text-[14px] leading-[24px] text-black`}
                                 >{`Select Tags`}</option>
                                 {item["select tags"]
