@@ -1,6 +1,7 @@
 import { nunito, figtree } from "@/utils/fonts";
 import useScreenWidth from "@/utils/custom-hooks/useScreenWidth";
 import { useState } from "react";
+import Link from "next/link";
 import Papa from "papaparse";
 
 const Index = () => {
@@ -14,8 +15,7 @@ const Index = () => {
   const [showError, SetError] = useState(false);
 
   const handleFileChange = (e: any) => {
-    const file = e?.dataTransfer?.files[0] ?? e?.target?.files[0];
-    if (file?.type == "text/csv") {
+    const file = e?.target?.files[0];
       setFileName(file.name);
       Papa.parse(file, {
         complete: (result: any) => {
@@ -23,14 +23,20 @@ const Index = () => {
         },
         header: true,
       });
-    } else {
-      setFileName("");
-      setUploadedData([]);
-      SetError(true);
-      setTimeout(() => {
-        SetError(false);
-      }, 3000);
-    }
+  };
+
+  const handleDrop = (e: any) => {
+    e.preventDefault();
+    setDragging(false);
+
+    const file = e.dataTransfer.files[0];
+    setFileName(file.name);
+    Papa.parse(file, {
+      complete: (result) => {
+        setUploadedData(result.data);
+      },
+      header: true,
+    });
   };
 
   const handleDragOver = (e: any) => {
@@ -46,12 +52,6 @@ const Index = () => {
   const handleDragLeave = (e: any) => {
     e.preventDefault();
     setDragging(false);
-  };
-
-  const handleDrop = (e: any) => {
-    e.preventDefault();
-    setDragging(false);
-    handleFileChange(e);
   };
 
   const handleSelect = (e: any, rowId: any) => {
@@ -103,7 +103,7 @@ const Index = () => {
                 showError
                   ? "translate-y-[0px] opacity-100 "
                   : "opacity-0  translate-y-[-5px]"
-              } absolute top-0 left-0 text-[14px] leading-[18px] font-[600] lg:text-[16px] lg:leading-[22px]  text-white bg-[#605BFF]/70 rounded-[10px] p-[15px] uppercase`}
+              } absolute top-0 left-0 text-[14px] leading-[18px] font-[600] lg:text-[16px] lg:leading-[22px]  text-white bg-red-600 rounded-[10px] p-[15px] uppercase`}
             >
               please drop a .csv file
             </div>
@@ -133,7 +133,7 @@ const Index = () => {
                   viewBox="0 0 36 36"
                   fill="none"
                 >
-                  <g clip-path="url(#clip0_22_1418)">
+                  <g clipPath="url(#clip0_22_1418)">
                     <path
                       d="M22.2801 17.2997L10.4556 15.1997V30.7166C10.4556 31.4252 11.0264 31.9997 11.7305 31.9997H32.1341C32.8382 31.9997 33.4091 31.4252 33.4091 30.7166V24.9997L22.2801 17.2997Z"
                       fill="#185C37"
@@ -192,9 +192,9 @@ const Index = () => {
                       y2="26.6473"
                       gradientUnits="userSpaceOnUse"
                     >
-                      <stop stop-color="#18884F" />
-                      <stop offset="0.5" stop-color="#117E43" />
-                      <stop offset="1" stop-color="#0B6631" />
+                      <stop stopColor="#18884F" />
+                      <stop offset="0.5" stopColor="#117E43" />
+                      <stop offset="1" stopColor="#0B6631" />
                     </linearGradient>
                     <clipPath id="clip0_22_1418">
                       <rect
@@ -207,13 +207,13 @@ const Index = () => {
                   </defs>
                 </svg>
                 {uploadedFileName ? (
-                  <div className={`${figtree.className} fle `}>
+                  <div className={`${figtree.className}`}>
                     <p className="text-[16px] mb-[15px]  leading-[24px] text-[#999CA0] ">
                       {uploadedFileName}
                     </p>
                     <p
                       onClick={() => {
-                        setFileName(null);
+                        setFileName("");
                         setUploadedData([]);
                         setUploaded(false);
                       }}
@@ -241,7 +241,7 @@ const Index = () => {
             </div>
             <button
               onClick={handleUpload}
-              className={`py-[10px] h-[44px] w-full rounded-[8px] hover:bg-[#605BFF]/95 duration-300 ease-out ${
+              className={`py-[10px] h-[44px] flex items-center justify-center w-full rounded-[8px] hover:bg-[#605BFF]/95 duration-300 ease-out ${
                 !uploadedFileName ? "pointer-events-none" : ""
               }  ${
                 isUploaded
@@ -267,7 +267,7 @@ const Index = () => {
                   />
                 </svg>
               ) : (
-                <div className="flex items-center gap-x-[10px] w-fit mx-auto">
+                <div className="flex items-center gap-x-[10px] w-fit justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -278,12 +278,14 @@ const Index = () => {
                     <path
                       d="M19.125 14.1923V16.9327C19.125 18.1435 18.1435 19.125 16.9327 19.125H7.06731C5.85653 19.125 4.875 18.1435 4.875 16.9327V14.1923M12 15.8365V4.875M12 4.875L8.71154 8.16346M12 4.875L15.2885 8.16346"
                       stroke="white"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                   </svg>
-                  <span className="capitalize text-[14px] leading-[24px] text-white font-[600] ">
+                  <span
+                    className={` ${figtree.className} capitalize text-[14px] leading-[24px] text-white font-[600]`}
+                  >
                     upload
                   </span>
                 </div>
@@ -330,8 +332,14 @@ const Index = () => {
                           <td className="p-[10px] lg:p-[15px] lg:bg-white lg:rounded-l-[8px]  py-[10px]">
                             {item?.id.toString().padStart(2, "0")}
                           </td>
-                          <td className="p-[10px] lg:p-[15px] bg-white max-lg:rounded-l-[8px]  ">
-                            {item.links}
+                          <td className="p-[10px] lg:p-[15px] bg-white max-lg:rounded-l-[8px]">
+                            <Link
+                              className={`${figtree.className} font-[400] text-[12px] lg:text-[14px] text-[#5B93FF] underline leading-[24px] `}
+                              target="_blank"
+                              href={`https://www.${item.links}`}
+                            >
+                              {`www.${item.links}`}
+                            </Link>
                           </td>
                           <td className="p-[10px] lg:p-[15px] bg-white">
                             {item.prefix}
@@ -346,7 +354,7 @@ const Index = () => {
                               >
                                 <option
                                   disabled
-                                  selected
+                                  defaultValue=""
                                   className={`${figtree.className} text-[14px] leading-[24px] text-black`}
                                 >{`Select Tags`}</option>
                                 {item["select tags"]
@@ -374,8 +382,8 @@ const Index = () => {
                                 <path
                                   d="M17 9.75L12.5 14.25L8 9.75"
                                   stroke="#999CA0"
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
                                 />
                               </svg>
                             </div>
@@ -388,7 +396,7 @@ const Index = () => {
                                     return (
                                       <>
                                         <div
-                                          key={index}
+                                          key={`${index}-${element}`}
                                           className="px-[10px] py-[5px] flex items-center gap-x-[5px] bg-[#605BFF] w-fit rounded-[4px] "
                                         >
                                           <div
@@ -410,8 +418,8 @@ const Index = () => {
                                             <path
                                               d="M5 5L8 8M8 8L5 11M8 8L11 11M8 8L11 5"
                                               stroke="white"
-                                              stroke-linecap="round"
-                                              stroke-linejoin="round"
+                                              strokeLinecap="round"
+                                              strokeLinejoin="round"
                                             />
                                           </svg>
                                         </div>
