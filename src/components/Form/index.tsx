@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import Image from "next/image";
+import { authenticateUser } from "@/utils/auth";
 import { lato, montserrat } from "@/utils/fonts";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
@@ -13,9 +14,6 @@ const Index = () => {
     { name: "apple" },
   ];
   const router = useRouter();
-  const handleGoogleSignIn = () => {
-    signIn("google", { callbackUrl: "/upload" });
-  };
   const [formData, setFormData] = useState<any>({
     email: "",
     password: "",
@@ -25,6 +23,15 @@ const Index = () => {
     password: "",
   });
   const [loader, setLoader] = useState(false);
+
+  const handleGoogleSignIn = () => {
+    signIn("google", {
+      callbackUrl: "/upload",
+      onSuccess: async () => {
+        authenticateUser();
+      },
+    });
+  };
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -47,6 +54,7 @@ const Index = () => {
       }
 
       if (isValid) {
+        authenticateUser();
         setTimeout(() => {
           router.push("/upload");
         }, 3000);

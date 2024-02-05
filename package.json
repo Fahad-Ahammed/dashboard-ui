@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "js-cookie": "^3.0.5",
     "next": "14.1.0",
     "next-auth": "^4.24.5",
     "papaparse": "^5.4.1",
@@ -16,6 +17,7 @@
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
     "@types/papaparse": "^5.3.14",
     "@types/react": "^18",
