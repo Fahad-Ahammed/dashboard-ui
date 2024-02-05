@@ -1,15 +1,13 @@
 import Header from "@/components/Headers/admin";
 import { Profile } from "@/components/Headers/admin";
-import { checkAuthentication } from "@/utils/auth";
 import { useSession } from "next-auth/react";
 
 const Index = ({ children }: any) => {
-  
   const { data: session } = useSession();
 
   return (
     <>
-      {(checkAuthentication() || session) && (
+      {session && (
         <div className="lg:flex max-w-[1600px] mx-auto ">
           <Header />
           <main className="flex-1">{children}</main>
