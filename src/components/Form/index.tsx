@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import Image from "next/image";
-import { authenticateUser } from "@/utils/auth";
+import { authenticateUser } from '@/utils/auth';
 import { lato, montserrat } from "@/utils/fonts";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
@@ -24,13 +24,8 @@ const Index = () => {
   });
   const [loader, setLoader] = useState(false);
 
-  const handleGoogleSignIn = () => {
-    signIn("google", {
-      callbackUrl: "/upload",
-      onSuccess: async () => {
-        authenticateUser();
-      },
-    });
+   const handleGoogleSignIn = () => {
+    signIn("google", { callbackUrl: "/upload"});
   };
 
   const handleSubmit = (e: any) => {
