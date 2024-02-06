@@ -309,7 +309,7 @@ const Index = () => {
                       <th className="w-20 lg:w-10 xl:w-8 p-[10px]xl:px-[15px]">
                         SI.No
                       </th>
-                      <th className="w-52 lg:w-28 xl:w-16 p-[10px] lg:px-[15px]">
+                      <th className="w-52 lg:w-32 xl:w-16 p-[10px] lg:px-[15px]">
                         Links
                       </th>
                       <th className="w-36 lg:w-16 xl:w-8 p-[10px] lg:px-[15px]">
@@ -346,12 +346,12 @@ const Index = () => {
                             {item.prefix}
                           </td>
                           <td className="p-[10px] lg:p-[15px] bg-white">
-                            <div className="w-[150px] relative">
+                            <div className="w-[130px] xl:w-[150px] relative">
                               <select
                                 name="tags"
                                 id="tags"
                                 onChange={(e) => handleSelect(e, item.id)}
-                                className={`bg-transparent relative border appearance-none py-[3px] lg:py-[5px] px-[10px] w-[150px] rounded-[8px]`}
+                                className={`bg-transparent relative border appearance-none py-[3px] lg:py-[5px] px-[10px] w-full rounded-[8px]`}
                               >
                                 <option
                                   disabled
