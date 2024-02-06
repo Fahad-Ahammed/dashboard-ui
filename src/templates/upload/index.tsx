@@ -28,15 +28,22 @@ const Index = () => {
   const handleDrop = (e: any) => {
     e.preventDefault();
     setDragging(false);
-
     const file = e.dataTransfer.files[0];
-    setFileName(file.name);
-    Papa.parse(file, {
-      complete: (result) => {
-        setUploadedData(result.data);
-      },
-      header: true,
-    });
+
+    if (file.type == "text/csv") {
+      setFileName(file.name);
+      Papa.parse(file, {
+        complete: (result) => {
+          setUploadedData(result.data);
+        },
+        header: true,
+      });
+    } else {
+      SetError(true);
+      setTimeout(() => {
+        SetError(false);
+      }, 2000);
+    }
   };
 
   const handleDragOver = (e: any) => {
@@ -208,7 +215,7 @@ const Index = () => {
                 </svg>
                 {uploadedFileName ? (
                   <div className={`${figtree.className}`}>
-                    <p className="text-[16px] mb-[15px]  leading-[24px] text-[#999CA0] ">
+                    <p className="text-[16px] mb-[15px] max-w-[200px] truncate leading-[24px] text-[#999CA0] ">
                       {uploadedFileName}
                     </p>
                     <p
